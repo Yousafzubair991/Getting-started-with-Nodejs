@@ -4,9 +4,10 @@ const jsonWebToken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const router = express?.Router();
 const User = require("../model/user");
+const checkAuth = require("../middleware/check-auth");
 
 //////////////////////GET ALL USERS////////////////////////
-router?.get("/", (req, res, next) => {
+router?.get("/", checkAuth, (req, res, next) => {
   User?.find()
     .then((result) => {
       res?.status(200)?.json({ count: result?.length, result: result });
@@ -104,7 +105,7 @@ router?.post("/signin", (req, res, next) => {
 });
 
 //////////////////////////////DELETE USER/////////////////////
-router?.delete("/deleteUser/:id", (req, res, next) => {
+router?.delete("/deleteUser/:id", checkAuth, (req, res, next) => {
   const userId = req?.params?.id;
   User?.deleteOne({ _id: userId })
     .then((result) => {
