@@ -1,2 +1,2 @@
 # Getting-started-with-Nodejs
-## npm start
+## 1. Clone the repo.
